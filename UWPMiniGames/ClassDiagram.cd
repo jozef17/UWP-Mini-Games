@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="UWPMiniGames.MainPage">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAQAAAAAAIAAADAAAAAAAgAAAYAgAAAAEAA=</HashCode>
+      <FileName>MainPage.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UWPMiniGames.App">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAIAAA=</HashCode>
+      <FileName>App.xaml.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UWPMiniGames.State">
+    <Position X="13" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAEAAAgAAAAAAIEEAAAAAAAAAAACAAAAAEAUAA=</HashCode>
+      <FileName>State.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWPMiniGames.GameSelection">
+    <Position X="10.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>GameSelection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWPMiniGames.Game">
+    <Position X="13.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAUAA=</HashCode>
+      <FileName>Game.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWPMiniGames.GameMenu">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAEAEAA=</HashCode>
+      <FileName>GameMenu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWPMiniGames.TicTacToe">
+    <Position X="6.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAgAEAAACAAGAAAIAAAIAgAgAAAAAABAIDAgAQAE=</HashCode>
+      <FileName>TicTacToe.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UWPMiniGames.Pause">
+    <Position X="15.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAUAA=</HashCode>
+      <FileName>Pause.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWPMiniGames.Snake" BaseTypeListCollapsed="true">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAIIEAAAIBAAIAiAAAAAAAABAIAAAAAAE=</HashCode>
+      <FileName>Snake.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="UWPMiniGames.TicTacToeMinimax">
+    <Position X="3" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAACAAAAAAAgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UWPMiniGames.TicTacToeNode">
+    <Position X="4.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAQAACAEAAAAAAEAAACAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="UWPMiniGames.IGame">
+    <Position X="8.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAAAAAAEAAAAAAAIAgAAAAAAAABAAAAAAAAE=</HashCode>
+      <FileName>IGame.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="UWPMiniGames.Move">
+    <Position X="3" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAI=</HashCode>
+      <FileName>Snake.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="UWPMiniGames.Result">
+    <Position X="4.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAAAAAAAAAAASAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TicTacToe.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

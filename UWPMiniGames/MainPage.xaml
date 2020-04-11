@@ -1,0 +1,34 @@
+﻿<Page
+    x:Class="UWPMiniGames.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:UWPMiniGames"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:canvas="using:Microsoft.Graphics.Canvas.UI.Xaml"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid IsHoldingEnabled="False" IsDoubleTapEnabled="False" IsRightTapEnabled="False" KeyUp="Grid_KeyUp">
+        <canvas:CanvasControl x:Name="Canvas" CreateResources="Canvas_CreateResources" Draw="Canvas_Draw" IsTapEnabled="True" Tapped="Canvas_Tapped"/>
+
+        <Button x:Name="Game1" Click="HandleClick"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="200" FocusVisualPrimaryBrush="#0AFFFFFF" Foreground="#0AFFFFFF">
+            <Image Source="Assets/Snake/Snake.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
+        </Button>
+        <!--
+        <Button x:Name="Game2" Click="HandleClick" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200" FocusVisualPrimaryBrush="#0AFFFFFF" Foreground="#0AFFFFFF">
+            <Image Source="Assets/LockScreenLogo.scale-200.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
+        </Button>
+        -->
+        <Button x:Name="Game3" Click="HandleClick" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="200" FocusVisualPrimaryBrush="#0AFFFFFF" Foreground="#0AFFFFFF">
+            <Image Source="Assets/TicTacToe/TicTacToe.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
+        </Button>
+
+        <Button x:Name="Back" Click="HandleClick" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100" Margin="50,50,0,0" FontFamily="Segoe MDL2 Assets" Content="&#xE112;" FontSize="50" Foreground="Black" />
+        <Button x:Name="Pause" Click="HandleClick" HorizontalAlignment="Left" VerticalAlignment="Top" Width="100" Height="100" Margin="200,50,0,0" FontFamily="Segoe MDL2 Assets" Content="&#xE103;" FontSize="50" Foreground="Black"/>
+
+        <Button x:Name="NewGame" Click="HandleClick" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="100" Content="NEW GAME" FontSize="55" Foreground="Black"/>
+        <Button x:Name="ContinueGame" Click="HandleClick" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="100" Content="LOAD GAME" FontSize="55" Foreground="Black"/>
+
+    </Grid>
+</Page>
