@@ -20,4 +20,5 @@ namespace UWPMiniGames
 
         void HandleKey(KeyRoutedEventArgs e);
     }
+
 }

@@ -23,7 +23,7 @@ namespace UWPMiniGames
                     game = new Snake(Canvas);
                     break;
                 case "Game2":
-                    // TODO
+                    game = new Tetris();
                     break;
                 case "Game3":
                     game = new TicTacToe(Canvas);
@@ -42,13 +42,11 @@ namespace UWPMiniGames
             {
                 if (b.Name == "Game1")
                 {
-                    b.Margin = new Thickness(0.25 * width - 25, 0, 0, 0);
-                    // b.Margin = new Thickness(0.25 * width - 150, 0, 0, 0);
+                    b.Margin = new Thickness(0.25 * width - 150, 0, 0, 0);
                 }
                 else if (b.Name == "Game3")
                 {
-                    b.Margin = new Thickness(0, 0, 0.25 * width - 25, 0);
-                    // b.Margin = new Thickness(0, 0, 0.25 * width - 150, 0);
+                    b.Margin = new Thickness(0, 0, 0.25 * width - 150, 0);
                 }
             }
 

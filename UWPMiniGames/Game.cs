@@ -4,40 +4,36 @@ using Windows.UI.Xaml.Input;
 namespace UWPMiniGames
 {
 
-    public class Game : State
+    public sealed class Game : State
     {
-        private IGame game = null;
+        private IGame CurrentGame = null;
 
         public Game(State previousState, IGame game) : base(previousState)
         {
             VisibleButtons = new string[] { "Back", "Pause" };
-            this.game = game;
+            CurrentGame = game;
         }
 
         public override void HandleTap(TappedRoutedEventArgs e)
         {
-            if (game != null)
-            {
-                game.HandleTap(e);
-            }
+            if (CurrentGame != null)
+                CurrentGame.HandleTap(e);
         }
 
         public override void HandleKey(KeyRoutedEventArgs e)
         {
-            if (game != null)
-            {
-                game.HandleKey(e);
-            }
+            if (CurrentGame != null)
+                CurrentGame.HandleKey(e);
         }
 
         public override State HandleClick(string buttonName)
         {
             if (buttonName == "Back")
             {
-                if (game != null)
+                if (CurrentGame != null)
                 {
-                    game.SaveGamne();
-                    game.ResetGame();
+                    CurrentGame.SaveGamne();
+                    CurrentGame.ResetGame();
                 }
                 return PrevState;
             }
@@ -46,10 +42,8 @@ namespace UWPMiniGames
 
         public override void Tick(CanvasDrawEventArgs args, long delta)
         {
-            if (game != null)
-            {
-                game.Render(args, delta);
-            }
+            if (CurrentGame != null)
+                CurrentGame.Render(args, delta);
         }
 
     }

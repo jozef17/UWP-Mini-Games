@@ -17,7 +17,7 @@ namespace UWPMiniGames
         protected Button[] Buttons;
         protected CanvasControl Canvas;
 
-        public State PrevState { get => PreviousState; }
+        protected State PrevState { get => PreviousState; }
 
 
         public State(State previousState)

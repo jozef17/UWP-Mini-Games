@@ -1,17 +1,13 @@
 ﻿using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
-using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
-using System.IO;
+using System.Linq;
 using System.Numerics;
-using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Storage;
 using Windows.System;
 using Windows.UI;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Input;
 
 namespace UWPMiniGames
@@ -21,36 +17,18 @@ namespace UWPMiniGames
         Up, Down, Left, Right
     }
 
-    class Snake : IGame
+    public sealed class Snake : GameBase
     {
-        private const string SaveFile = "snake.dat";
-
-        // Play Area
-        private const byte Height = 10;
-        private const byte Width = 16;
-        private const byte UnitSize = 100;
-        private const byte WaitTime = 200;
-
-        // Dot position
-        Random rnd = new Random();
-
         // GUI elements
-        private CanvasControl Canvas = null;
         private CanvasBitmap Head = null;
 
         // Game state
         private Move Direction = Move.Right;
-        private int?[,] GameState = new int?[Height, Width];
-        private int TimeLeft = WaitTime;
         private int SnakeLength = 0;
-        private bool ended = false;
 
-
-        public Snake(CanvasControl canvas)
+        public Snake(CanvasControl canvas) : base("nake.dat", 10, 16, new Vector2(UnitSize, 10))
         {
             Task task = LoadResourcesAsync(canvas);
-            Canvas = canvas;
-            ResetGame();
         }
 
         private async Task LoadResourcesAsync(CanvasControl canvas)
@@ -60,56 +38,27 @@ namespace UWPMiniGames
         }
 
 
-        public void HandleTap(TappedRoutedEventArgs e) { }
+        public override void HandleTap(TappedRoutedEventArgs e) { }
 
-        public void LoadGame()
+        public override void LoadGame()
         {
-            StreamReader file = new StreamReader(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile);
-            string text = file.ReadLine();
-            string[] state = text.Split(" ");
-            file.Close();
-
-            // Load Direction
-            switch (state[0])
-            {
-                case "Up":
-                    Direction = Move.Up;
-                    break;
-                case "Down":
-                    Direction = Move.Down;
-                    break;
-                case "Left":
-                    Direction = Move.Left;
-                    break;
-                case "Right":
-                    Direction = Move.Right;
-                    break;
-            }
+            string[] state = GameUtil.ReadFile(SaveFile);
 
             // Load Game State
-            for (byte i = 0; i < Height; i++)
-                for (byte j = 0; j < Width; j++)
-                {
-                    if (state[i * Width + j + 1] == "-1")
-                    {
-                        GameState[i, j] = null;
-                    }
-                    else
-                    {
-                        GameState[i, j] = int.Parse(state[i * Width + j + 1]);
-                        if (GameState[i, j] > SnakeLength)
-                            SnakeLength = (int)GameState[i, j];
-                    }
-                }
+            LoadState(1, state);
+
+            // Load Snake Directionm
+            Direction = (Move)Enum.Parse(typeof(Move), state[0]);
+
+            // Get Snake Lenght
+            int? max = GameState.Cast<int?>().Max();
+            SnakeLength = (int)max;
         }
 
-        public void ResetGame()
+        public override void ResetGame()
         {
+            base.ResetGame();
             Direction = Move.Right;
-
-            for (byte i = 0; i < Height; i++)
-                for (byte j = 0; j < Width; j++)
-                    GameState[i, j] = null;
 
             for (int i = 0; i < 3; i++)
                 GameState[Height / 2, Width / 2 - i] = i + 1;
@@ -118,57 +67,20 @@ namespace UWPMiniGames
             // Generate point Position 
             (byte a, byte b) point = NextPoint();
             GameState[point.a, point.b] = 0;
-
-            TimeLeft = 4 * WaitTime;
-            ended = false;
         }
 
-        public void SaveGamne()
+        public override void SaveGamne()
         {
+            base.SaveGamne();
+
             if (!ended)
-            {
-                StringBuilder sb = new StringBuilder();
-                sb.Append(Direction.ToString() + " ");
-                for (int i = 0; i < Height; i++)
-                    for (int j = 0; j < Width; j++)
-                        if (GameState[i, j] == null)
-                            sb.Append("-1 ");
-                        else
-                            sb.Append(GameState[i, j].ToString() + " ");
-
-                using (StreamWriter file = new StreamWriter(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile))
-                    file.WriteLine(sb.ToString());
-
-                return;
-            }
-
-            // Delete old save file
-            if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile))
-                File.Delete(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile);
+                GameUtil.SaveFile(SaveFile, Direction.ToString() + " " + SaveState());
         }
 
-        public bool WasSaved()
+        protected override void Render(CanvasDrawEventArgs args, Rect bounds, float ratio, Vector2 startPoint)
         {
-            return File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile);
-        }
-
-        public void Render(CanvasDrawEventArgs args, long delta)
-        {
-            TimeLeft -= (int)delta;
-
-            // Evaluate game status
-            if (!ended && (TimeLeft <= 0))
-            {
-                HandleMove();
-                TimeLeft += WaitTime;
-            }
-
-            Rect bounds = ApplicationView.GetForCurrentView().VisibleBounds;
-            float ratio = GetRatio(bounds);
+            // Display Gamne State
             float a = UnitSize * ratio;
-            Vector2 startPoint = GetStartPoint(bounds, ratio);
-
-            args.DrawingSession.FillRectangle(startPoint.X, startPoint.Y, Width * a, Height * a, Color.FromArgb(50, 255, 255, 255));
 
             for (byte i = 0; i < Height; i++)
                 for (byte j = 0; j < Width; j++)
@@ -213,28 +125,6 @@ namespace UWPMiniGames
                         args.DrawingSession.FillRectangle(startPoint.X + j * a, startPoint.Y + i * a, a, a, Color.FromArgb(255, 0, 255, 0));
                     }
                 }
-
-            if (ended)
-            {
-                // Display PAUSE TEXT
-                args.DrawingSession.FillRectangle((float)bounds.Width / 2 - 300, (float)bounds.Height / 2 - 75, 600, 150, Color.FromArgb(255, 255, 0, 0));
-
-                CanvasTextFormat format = new CanvasTextFormat() { FontSize = 92 };
-                args.DrawingSession.DrawText("GAME OVER", (float)bounds.Width / 2 - 250, (float)bounds.Height / 2 - 65, Color.FromArgb(255, 0, 0, 0), format);
-            }
-        }
-
-        private float GetRatio(Rect canvasBounds) => ((float)0.75 * (float)canvasBounds.Height / (float)(Height * UnitSize));        //  TODO !!!
-
-
-        private Vector2 GetStartPoint(Rect canvasBounds, float ratio)
-        {
-            float a = ratio * UnitSize;
-
-            float x = (float)canvasBounds.Width / 2 - ((Width * a) / 2) + a;
-            float y = (float)canvasBounds.Height / 2 - ((Height * a) / 2) + ratio * 10;
-
-            return new Vector2(x, y);
         }
 
         private (byte, byte) NextPoint()
@@ -249,7 +139,7 @@ namespace UWPMiniGames
             }
         }
 
-        private void HandleMove()
+        protected override void ProcessState()
         {
             int endX = -1, endY = -1;
             int headX = -1, headY = -1;
@@ -329,7 +219,7 @@ namespace UWPMiniGames
             }
         }
 
-        public void HandleKey(KeyRoutedEventArgs e)
+        public override void HandleKey(KeyRoutedEventArgs e)
         {
             // Change snake direction
             if (!ended)

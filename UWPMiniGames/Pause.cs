@@ -6,7 +6,7 @@ using Windows.UI.ViewManagement;
 
 namespace UWPMiniGames
 {
-    public class Pause : State
+    public sealed class Pause : State
     {
         public Pause(State previousState) : base(previousState)
         {

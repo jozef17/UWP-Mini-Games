@@ -15,11 +15,11 @@
         <Button x:Name="Game1" Click="HandleClick"  HorizontalAlignment="Left" VerticalAlignment="Center" Width="200" Height="200" FocusVisualPrimaryBrush="#0AFFFFFF" Foreground="#0AFFFFFF">
             <Image Source="Assets/Snake/Snake.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
         </Button>
-        <!--
+
         <Button x:Name="Game2" Click="HandleClick" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="200" FocusVisualPrimaryBrush="#0AFFFFFF" Foreground="#0AFFFFFF">
-            <Image Source="Assets/LockScreenLogo.scale-200.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
+            <Image Source="Assets/Tetris.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
         </Button>
-        -->
+
         <Button x:Name="Game3" Click="HandleClick" HorizontalAlignment="Right" VerticalAlignment="Center" Width="200" Height="200" FocusVisualPrimaryBrush="#0AFFFFFF" Foreground="#0AFFFFFF">
             <Image Source="Assets/TicTacToe/TicTacToe.png" Margin="0,0,0,0" FocusVisualSecondaryBrush="White" />
         </Button>

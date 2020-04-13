@@ -3,13 +3,11 @@ using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Text;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using System;
-using System.IO;
 using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Foundation;
-using Windows.Storage;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Input;
@@ -21,7 +19,7 @@ namespace UWPMiniGames
         XWin, OWin, Game, NoWin
     }
 
-    public class TicTacToe : IGame
+    public sealed class TicTacToe : IGame
     {
         private const string SaveFile = "tictactoe.dat";
 
@@ -56,10 +54,7 @@ namespace UWPMiniGames
             O = await CanvasBitmap.LoadAsync(canvas, new Uri("ms-appx:///Assets/TicTacToe/O.png"));
         }
 
-        public bool WasSaved()
-        {
-            return File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile);
-        }
+        public bool WasSaved() => GameUtil.FileExists(SaveFile);
 
         public void ResetGame()
         {
@@ -74,10 +69,7 @@ namespace UWPMiniGames
 
         public void LoadGame()
         {
-            StreamReader file = new StreamReader(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile);
-            string text = file.ReadLine();
-            string[] state = text.Split(" ");
-            file.Close();
+            string[] state = GameUtil.ReadFile(SaveFile);
 
             byte max = 0;
             byte[,] moves = new byte[9, 2];
@@ -116,15 +108,13 @@ namespace UWPMiniGames
                             sb.Append(Game[i, j].ToString() + " ");
 
                 // Save State
-                using (StreamWriter file = new StreamWriter(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile))
-                    file.WriteLine(sb.ToString());
+                GameUtil.SaveFile(SaveFile, sb.ToString());
 
                 return;
             }
 
             // Delete old save file
-            if (File.Exists(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile))
-                File.Delete(ApplicationData.Current.LocalFolder.Path + "\\" + SaveFile);
+            GameUtil.DeleteFile(SaveFile);
         }
 
 
