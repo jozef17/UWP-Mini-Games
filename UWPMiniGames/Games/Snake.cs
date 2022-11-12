@@ -26,7 +26,7 @@ namespace UWPMiniGames
         private Move Direction = Move.Right;
         private int SnakeLength = 0;
 
-        public Snake(CanvasControl canvas) : base("nake.dat", 10, 16, new Vector2(UnitSize, 10))
+        public Snake(CanvasControl canvas) : base("snake.dat", 10, 16, new Vector2(UnitSize, 10), 250)
         {
             Task task = LoadResourcesAsync(canvas);
         }
