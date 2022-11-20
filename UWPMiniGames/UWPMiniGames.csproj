@@ -120,6 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="State\Game.cs" />
+    <Compile Include="Games\Breakout.cs" />
     <Compile Include="Games\GameBase.cs" />
     <Compile Include="State\GameMenu.cs" />
     <Compile Include="State\GameSelection.cs" />
@@ -142,6 +143,7 @@
     <None Include="UWPMiniGames_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Breakout.png" />
     <Content Include="Assets\image.png" />
     <Content Include="Assets\Snake\Head.png" />
     <Content Include="Assets\Snake\Snake.png" />
