@@ -36,7 +36,7 @@ namespace UWPMiniGames
             this.InitializeComponent();
 
             // Set initials state & Reorganise Elements based on current width y Height
-            CurrentState = new GameSelection(Canvas, Game1, Game2, Game3, NewGame, ContinueGame, Back, Pause);
+            CurrentState = new GameSelection(Canvas, Game1, Game2, Game3, Game4, NewGame, ContinueGame, Back, Pause);
             CurrentState.SetState();
 
             // Add Window Changed "listener"
